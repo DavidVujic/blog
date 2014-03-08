@@ -1,0 +1,53 @@
+﻿@model NoScriptFirst.Models.Person
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>You might not need JavaScript - NoScript First</title>
+</head>
+<body>
+
+    <div>
+        @using (Html.BeginForm("Add", "Home", FormMethod.Post, new { id = "my-little-form" }))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.TextBoxFor(model => model.Name)
+
+            <input id="my-button" type="submit" value="Send" />
+        }
+    </div>
+
+    <noscript>
+        @if (ViewBag.Message != null)
+        {
+            <p>@ViewBag.Message</p>
+        }
+    </noscript>
+
+    <script src="~/Scripts/jquery-2.1.0.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('#my-button').on('click', function (clickEvent) {
+
+                clickEvent.preventDefault();
+
+                var form = $('#my-little-form');
+
+                var promise = $.post(form.attr('action'), form.serialize());
+
+                promise.done(function (result) {
+                    console.log(result);
+                });
+
+            });
+        });
+    </script>
+</body>
+</html>
