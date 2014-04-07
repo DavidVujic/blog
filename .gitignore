@@ -168,6 +168,13 @@ UpgradeLog*.htm
 App_Data/*.mdf
 App_Data/*.ldf
 
+# EPiServer app data folder
+AppData
+modulesbin
+_protected
+IndexingService.svc
+License.config
+
 #############
 ## Windows detritus
 #############

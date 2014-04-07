@@ -1,0 +1,10 @@
+﻿@model DynamicForms.Models.Blocks.InputBlock
+
+<div class="@Model.Field">
+    @Html.TextBox(Model.GetFullName(), string.Empty, new
+        {
+            data_val_regex_pattern = Model.GetPattern(),
+            data_val_required = Model.IsRequired,
+            data_abide_validator = Model.Field.ToLower()
+        })
+</div>

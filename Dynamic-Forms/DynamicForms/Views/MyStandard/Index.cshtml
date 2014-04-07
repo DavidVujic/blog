@@ -1,0 +1,92 @@
+﻿@model DynamicForms.Models.Pages.MyStandardPage
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Dynamic Forms with EPiServer 7.5</title>
+</head>
+<body>
+    <div>
+        @Html.PropertyFor(model => model.MainBody)
+    </div>
+    <div>
+        <form action="/" method="POST" data-abide>
+            @Html.PropertyFor(model => model.MainContentArea)
+
+            <input type="submit" value="Send" />
+
+        </form>
+    </div>
+    <script src="~/Scripts/jquery-2.1.0.js"></script>
+    <script src="~/Scripts/foundation.js"></script>
+    <script src="~/Scripts/foundation.abide.js"></script>
+
+    <script>
+        var validationHelper = (function () {
+            var $;
+
+            var isFieldRequired = function (el) {
+                var val = $(el).data('val-required');
+
+                return (val && val.toLowerCase() === 'true');
+            };
+
+            var getPatternFromField = function (el) {
+                return $(el).data('val-regex-pattern');
+            };
+
+            var validateElement = function (el, pattern) {
+                var expression = new RegExp(pattern, "g");
+
+                var isValid = expression.test(el.value);
+                console.log(el.value + ' is valid: ' + isValid);
+
+                return isValid;
+            };
+
+            var initialize = function (jQuery) {
+                $ = jQuery;
+            }
+
+            return {
+                init: initialize,
+                isRequired: isFieldRequired,
+                getPattern: getPatternFromField,
+                validate: validateElement
+            };
+        }());
+
+        validationHelper.init($);
+    </script>
+
+    <script>
+        Foundation.set_namespace = function () { };
+
+        $(document).foundation({
+            abide: {
+                validators: {
+                    firstname: function (el, required, parent) {
+                        var isRequired = validationHelper.isRequired(el);
+                        var pattern = validationHelper.getPattern(el);
+
+                        if (el.value.length === 0 && !isRequired) {
+                            return true;
+                        }
+
+                        return validationHelper.validate(el, pattern);
+                    }
+               }
+            }
+        });
+
+        $(document).foundation();
+
+    </script>
+
+</body>
+</html>
