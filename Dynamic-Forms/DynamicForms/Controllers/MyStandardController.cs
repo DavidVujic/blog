@@ -44,7 +44,7 @@ namespace DynamicForms.Controllers
 					continue;
 				}
 
-				var input = block as ICustomValidation;
+				var input = block as IDynamicField;
 
 				if (input == null)
 				{
@@ -58,7 +58,7 @@ namespace DynamicForms.Controllers
 					continue;
 				}
 
-				validatedItems.Add(validator.IsValid(model));
+				validatedItems.Add(validator.IsValid(model, input.IsRequired));
 			}
 
 			return validatedItems;

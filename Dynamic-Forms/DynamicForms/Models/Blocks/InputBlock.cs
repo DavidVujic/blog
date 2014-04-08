@@ -5,17 +5,10 @@ using EPiServer.DataAnnotations;
 
 namespace DynamicForms.Models.Blocks
 {
-	public interface ICustomValidation
-	{
-		CategoryList GetCategories();
-		ICustomValidator GetValidator();
-		string GetPattern();
-	}
-
 	[ContentType(DisplayName = "Dynamic Input Block",
 		GUID = "AE305CDE-BA47-490E-80E4-7BB8B04D90C5",
 		Description = "")]
-	public class InputBlock : BlockData, ICustomValidation
+	public class InputBlock : BlockData, IDynamicField
 	{
 		[Ignore]
 		public bool IsRequired { get; set; }

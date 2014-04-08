@@ -11,8 +11,13 @@ namespace DynamicForms.Business.Validators
 			return Regexp;
 		}
 
-		public bool IsValid(dynamic model)
+		public bool IsValid(dynamic model, bool isRequired)
 		{
+			if (!isRequired)
+			{
+				return true;
+			}
+
 			var formData = model as MyFormData;
 
 			if (formData == null)

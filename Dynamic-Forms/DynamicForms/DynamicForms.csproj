@@ -220,6 +220,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Blocks\IDynamicField.cs" />
     <Compile Include="Models\Blocks\InputBlock.cs" />
     <Compile Include="Models\Pages\MyStandardPage.cs" />
     <Compile Include="Models\ViewModels\MyFormData.cs" />
