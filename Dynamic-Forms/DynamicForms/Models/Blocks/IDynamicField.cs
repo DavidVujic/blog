@@ -5,9 +5,9 @@ namespace DynamicForms.Models.Blocks
 {
 	public interface IDynamicField
 	{
-		bool IsRequired { get; set; }
-		string Field { get; set; }
-		string Group { get; set; }
+		bool IsRequired { get; }
+		string Field { get; }
+		string Group { get; }
 
 		CategoryList GetCategories();
 		ICustomValidator GetValidator();

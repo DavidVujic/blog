@@ -1,6 +1,9 @@
-﻿using DynamicForms.Business.Helpers;
+﻿using System;
+using System.Linq;
+using DynamicForms.Business.Helpers;
 using DynamicForms.Business.Validators;
 using EPiServer.Core;
+using EPiServer.DataAbstraction;
 using EPiServer.DataAnnotations;
 
 namespace DynamicForms.Models.Blocks
@@ -11,14 +14,48 @@ namespace DynamicForms.Models.Blocks
 	public class InputBlock : BlockData, IDynamicField
 	{
 		[Ignore]
-		public bool IsRequired { get; set; }
-		
+		public bool IsRequired
+		{
+			get
+			{
+				var category = GetCategory(CategoryHelper.IsBehaviour);
+
+				return category != null && category.Name.Equals("Required", StringComparison.InvariantCultureIgnoreCase);
+			}
+		}
+
 		[Ignore]
-		public string Field { get; set; }
-		
+		public string Field
+		{
+			get
+			{
+				var category = GetCategory(CategoryHelper.IsField);
+				
+				return category == null ? string.Empty : category.Name;
+			}
+		}
+
 		[Ignore]
-		public string Group { get; set; }
-		
+		public string Group
+		{
+			get
+			{
+				var category = GetCategory(CategoryHelper.IsGroup);
+
+				return category == null ? string.Empty : category.Name;
+			}
+		}
+
+		private Category GetCategory(Func<int, bool> byCategoryType)
+		{
+			var categories = GetCategories();
+
+			return categories
+				.Where(byCategoryType)
+				.Select(Category.Find)
+				.FirstOrDefault();
+		}
+
 		public string GetFullName()
 		{
 			return string.Format("{0}.{1}", Group, Field);
