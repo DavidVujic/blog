@@ -1,0 +1,21 @@
+{
+  "name": "es6-and-tdd",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "David Vujic",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-babel": "^4.0.0",
+    "gulp-jshint": "^1.9.2",
+    "gulp-newer": "^0.5.0",
+    "node-qunit-phantomjs": "^1.2.0"
+  }
+}

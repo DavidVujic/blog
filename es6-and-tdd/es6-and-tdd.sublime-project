@@ -1,0 +1,13 @@
+{
+	"folders":
+	[
+		{
+			"follow_symlinks": true,
+			"path": "lib"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "tests"
+		}
+	]
+}
