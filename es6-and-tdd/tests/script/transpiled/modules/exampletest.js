@@ -8,6 +8,8 @@ define(["exports", "modules/foo"], function (exports, _modulesFoo) {
 	QUnit.module("my example tests");
 
 	QUnit.test("will this message work?", function (assert) {
-		assert.equal(foo.message, "hello foo");
+		var expected = "hello foo";
+
+		assert.equal(foo.message, expected);
 	});
 });
