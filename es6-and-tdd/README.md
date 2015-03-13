@@ -1,3 +1,5 @@
-Code from the blog post "Can I test it? (yes, you can!)"
+Blog post code
 ========
 
+##Can I test it?##
+(yes, you can)
