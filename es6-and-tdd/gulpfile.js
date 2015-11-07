@@ -39,6 +39,21 @@ var lint = function (paths) {
 		.pipe(jshint.reporter('fail'));
 };
 
+gulp.task('copy vendor scripts', function () {
+	gulp.src([
+			'node_modules/jquery/dist/jquery.min.js',
+			'node_modules/requirejs/require.js',
+			'node_modules/babel-polyfill/dist/polyfill.min.js'
+		])
+		.pipe(gulp.dest('lib/script/vendor'));
+
+	gulp.src([
+			'node_modules/qunitjs/qunit/qunit.css',
+			'node_modules/qunitjs/qunit/qunit.js'
+		])
+		.pipe(gulp.dest('tests/script/qunit'));
+});
+
 gulp.task('transpile tests', function () {
 	return transpile(tests);
 });
@@ -56,7 +71,9 @@ gulp.task('lint-source', function () {
 });
 
 gulp.task('qunit', function () {
-	qunit(testFolder + '/testrunner.html', { 'verbose': false });
+	qunit(testFolder + '/testrunner.html', {
+		'verbose': false
+	});
 });
 
 gulp.task('watch', function () {
@@ -64,11 +81,12 @@ gulp.task('watch', function () {
 	gulp.watch(code.source, ['transpile source', 'lint-source', 'qunit']);
 });
 
-gulp.task('default',
-	['transpile tests',
+gulp.task('default', [
+	'copy vendor scripts',
+	'transpile tests',
 	'transpile source',
 	'lint-tests',
 	'lint-source',
 	'qunit',
-	'watch']);
-	
+	'watch'
+]);
