@@ -25,21 +25,21 @@ var code = {
 	destination: codeFolder + dest
 };
 
-var transpile = function(paths) {
+var transpile = function (paths) {
 	return gulp.src(paths.source)
 		.pipe(newer(paths.destination))
 		.pipe(babel(babelOptions))
 		.pipe(gulp.dest(paths.destination));
 };
 
-var lint = function(paths) {
+var lint = function (paths) {
 	return gulp.src(paths.source)
 		.pipe(jshint())
 		.pipe(jshint.reporter('default'))
 		.pipe(jshint.reporter('fail'));
 };
 
-gulp.task('copy vendor scripts', function() {
+gulp.task('copy vendor scripts', function () {
 	gulp.src([
 			'node_modules/jquery/dist/jquery.min.js',
 			'node_modules/requirejs/require.js',
@@ -54,29 +54,29 @@ gulp.task('copy vendor scripts', function() {
 		.pipe(gulp.dest('tests/script/qunit'));
 });
 
-gulp.task('transpile tests', function() {
+gulp.task('transpile tests', function () {
 	return transpile(tests);
 });
 
-gulp.task('transpile source', function() {
+gulp.task('transpile source', function () {
 	return transpile(code);
 });
 
-gulp.task('lint-tests', function() {
+gulp.task('lint-tests', function () {
 	return lint(tests);
 });
 
-gulp.task('lint-source', function() {
+gulp.task('lint-source', function () {
 	return lint(code);
 });
 
-gulp.task('qunit', function() {
+gulp.task('qunit', function () {
 	qunit(testFolder + '/testrunner.html', {
 		'verbose': false
 	});
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', function () {
 	gulp.watch(tests.source, ['transpile tests', 'lint-tests', 'qunit']);
 	gulp.watch(code.source, ['transpile source', 'lint-source', 'qunit']);
 });
