@@ -1,9 +1,11 @@
-define(["exports", "module"], function (exports, module) {
-	"use strict";
+'use strict';
 
+define(['exports'], function (exports) {
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
 	var foo = {
-		message: "hello foo"
+		message: 'hello foo'
 	};
-
-	module.exports = foo;
+	exports.default = foo;
 });

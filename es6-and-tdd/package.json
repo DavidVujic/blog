@@ -12,10 +12,12 @@
   "author": "David Vujic",
   "license": "MIT",
   "devDependencies": {
-    "gulp": "^3.8.11",
-    "gulp-babel": "^4.0.0",
-    "gulp-jshint": "^1.9.2",
-    "gulp-newer": "^0.5.0",
-    "node-qunit-phantomjs": "^1.2.0"
+    "gulp": "^3.9.0",
+    "gulp-babel": "^6.1.0",
+    "babel-preset-es2015": "^6.1.2",
+    "babel-plugin-transform-es2015-modules-amd": "^6.0.15",
+    "gulp-jshint": "^1.12.0",
+    "gulp-newer": "^1.0.0",
+    "node-qunit-phantomjs": "^1.2.2"
   }
 }

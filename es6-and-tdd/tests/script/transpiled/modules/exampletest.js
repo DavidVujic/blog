@@ -1,15 +1,13 @@
-define(["exports", "modules/foo"], function (exports, _modulesFoo) {
-	"use strict";
+'use strict';
 
-	var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+define(['modules/foo'], function (_foo) {
+	var _foo2 = _interopRequireDefault(_foo);
 
-	var foo = _interopRequire(_modulesFoo);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	QUnit.module("my example tests");
-
-	QUnit.test("will this message work?", function (assert) {
-		var expected = "hello foo";
-
-		assert.equal(foo.message, expected);
+	QUnit.module('my example tests');
+	QUnit.test('will this message work?', function (assert) {
+		var expected = 'hello foo';
+		assert.equal(_foo2.default.message, expected);
 	});
 });

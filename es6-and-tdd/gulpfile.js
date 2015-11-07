@@ -10,7 +10,10 @@ var testFolder = 'tests';
 var codeFolder = 'lib';
 var dest = '/script/transpiled';
 var files = '/script/es6/**/*.js';
-var babelOptions = {modules: 'amd'};
+var babelOptions = {
+	presets: ['es2015'],
+	plugins: ["transform-es2015-modules-amd"]
+};
 
 var tests = {
 	source: testFolder + files,
@@ -61,10 +64,11 @@ gulp.task('watch', function () {
 	gulp.watch(code.source, ['transpile source', 'lint-source', 'qunit']);
 });
 
-gulp.task('default', 
-	['transpile tests', 
-	'transpile source', 
-	'lint-tests', 
-	'lint-source', 
-	'qunit', 
+gulp.task('default',
+	['transpile tests',
+	'transpile source',
+	'lint-tests',
+	'lint-source',
+	'qunit',
 	'watch']);
+	
