@@ -45,13 +45,13 @@ gulp.task('copy vendor scripts', function () {
 			'node_modules/requirejs/require.js',
 			'node_modules/babel-polyfill/dist/polyfill.min.js'
 		])
-		.pipe(newer('lib/script/vendor'));
+		.pipe(gulp.dest('lib/script/vendor'));
 
 	gulp.src([
 			'node_modules/qunitjs/qunit/qunit.css',
 			'node_modules/qunitjs/qunit/qunit.js'
 		])
-		.pipe(newer('tests/script/qunit'));
+		.pipe(gulp.dest('tests/script/qunit'));
 });
 
 gulp.task('transpile tests', function () {
@@ -76,11 +76,17 @@ gulp.task('qunit', function () {
 	});
 });
 
+gulp.task('watch', function () {
+	gulp.watch(tests.source, ['transpile tests', 'lint-tests', 'qunit']);
+	gulp.watch(code.source, ['transpile source', 'lint-source', 'qunit']);
+});
+
 gulp.task('default', [
 	'copy vendor scripts',
 	'transpile tests',
 	'transpile source',
 	'lint-tests',
 	'lint-source',
-	'qunit'
+	'qunit',
+	'watch'
 ]);
