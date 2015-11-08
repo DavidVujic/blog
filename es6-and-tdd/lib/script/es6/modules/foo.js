@@ -1,7 +1,8 @@
+import bar from 'modules/bar';
+
 let foo = {
-	message: 'hello foo',
-	doSomething() {
-		return 1 + 1;
+	message() {
+		return 'The message is: ' + bar.getMessage();
 	}
 };
 

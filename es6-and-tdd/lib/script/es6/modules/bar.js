@@ -1,5 +1,9 @@
-import foo from 'modules/foo';
+import $ from 'jquery';
 
-let bar = () => foo.message;
+const bar = {
+	getMessage: () => {
+		return $('input[name=message]').val();
+	}
+};
 
 export default bar;

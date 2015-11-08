@@ -1,3 +1,3 @@
-define(["exports", "./modules/exampletest.js"], function (exports, _modulesExampletestJs) {
-  "use strict";
-});
+'use strict';
+
+define(['./modules/foo-tests.js', './modules/bar-tests.js'], function () {});
