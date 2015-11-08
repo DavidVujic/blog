@@ -5,7 +5,10 @@ define(['exports'], function (exports) {
 		value: true
 	});
 	var foo = {
-		message: 'hello foo'
+		message: 'hello foo',
+		doSomething: function doSomething() {
+			return 1 + 1;
+		}
 	};
 	exports.default = foo;
 });
