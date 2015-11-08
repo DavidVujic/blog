@@ -1,0 +1,9 @@
+{
+	"undef": true,
+	"unused": true,
+	"esnext": true,
+	"globals": {
+		"require": true,
+		"define": true
+	}		
+}
