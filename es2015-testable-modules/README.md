@@ -1,4 +1,3 @@
-##Can I test it?##
-(yes, you can)
+##Testable JavaScript modules - without Dependency Injection##
 
 http://davidvujic.blogspot.se
