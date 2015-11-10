@@ -12,7 +12,7 @@ var dest = '/script/transpiled';
 var files = '/script/es6/**/*.js';
 var babelOptions = {
 	presets: ['es2015'],
-	plugins: ["transform-es2015-modules-amd"]
+	plugins: ['transform-es2015-modules-amd']
 };
 
 var tests = {
@@ -39,54 +39,57 @@ var lint = function (paths) {
 		.pipe(jshint.reporter('fail'));
 };
 
-gulp.task('copy vendor scripts', function () {
-	gulp.src([
+gulp.task('lint tests', function () {
+	return lint(tests);
+});
+
+gulp.task('lint source', ['lint tests'], function () {
+	return lint(code);
+});
+
+gulp.task('copy vendor scripts', ['lint source'], function () {
+	return gulp.src([
 			'node_modules/jquery/dist/jquery.min.js',
 			'node_modules/requirejs/require.js',
 			'node_modules/babel-polyfill/dist/polyfill.min.js'
 		])
-		.pipe(gulp.dest('lib/script/vendor'));
+		.pipe(newer('lib/script/vendor'));
+});
 
-	gulp.src([
+gulp.task('copy unit test lib', ['copy vendor scripts'], function () {
+	return gulp.src([
 			'node_modules/qunitjs/qunit/qunit.css',
 			'node_modules/qunitjs/qunit/qunit.js'
 		])
-		.pipe(gulp.dest('tests/script/qunit'));
+		.pipe(newer('tests/script/qunit'));
 });
 
-gulp.task('transpile tests', function () {
+gulp.task('transpile tests', ['copy unit test lib'], function () {
 	return transpile(tests);
 });
 
-gulp.task('transpile source', function () {
+gulp.task('transpile source', ['transpile tests'], function () {
 	return transpile(code);
 });
 
-gulp.task('lint-tests', function () {
-	return lint(tests);
-});
-
-gulp.task('lint-source', function () {
-	return lint(code);
-});
-
-gulp.task('qunit', function () {
-	qunit(testFolder + '/testrunner.html', {
+gulp.task('qunit', ['transpile source'], function () {
+	return qunit(testFolder + '/testrunner.html', {
 		'verbose': false
 	});
 });
 
-gulp.task('watch', function () {
-	gulp.watch(tests.source, ['transpile tests', 'lint-tests', 'qunit']);
-	gulp.watch(code.source, ['transpile source', 'lint-source', 'qunit']);
+gulp.task('watch', ['qunit'], function () {
+	gulp.watch(tests.source, ['transpile tests', 'lint tests', 'qunit']);
+	gulp.watch(code.source, ['transpile source', 'lint source', 'qunit']);
 });
 
 gulp.task('default', [
+	'lint tests',
+	'lint source',
 	'copy vendor scripts',
+	'copy unit test lib',
 	'transpile tests',
 	'transpile source',
-	'lint-tests',
-	'lint-source',
 	'qunit',
 	'watch'
 ]);
