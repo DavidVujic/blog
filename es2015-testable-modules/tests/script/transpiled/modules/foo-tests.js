@@ -7,8 +7,8 @@ define(['modules/foo', 'modules/bar'], function (_foo, _bar) {
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	var fakeMessage = 'a fake message.';
 	var original = _bar2.default.getMessage;
-	var fakeMessage = 'A message from a fake getMessage.';
 
 	var fake = function fake() {
 		return fakeMessage;
@@ -23,7 +23,6 @@ define(['modules/foo', 'modules/bar'], function (_foo, _bar) {
 		}
 	});
 	QUnit.test('can an imported module be mocked?', function (assert) {
-		var expected = 'The message is: ' + fakeMessage;
-		assert.equal(_foo2.default.message(), expected);
+		assert.equal(_foo2.default.message(), fakeMessage);
 	});
 });

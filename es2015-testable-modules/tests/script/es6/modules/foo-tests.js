@@ -1,9 +1,9 @@
 import foo from 'modules/foo';
 import bar from 'modules/bar';
 
-const original = bar.getMessage;
-const fakeMessage = 'A message from a fake getMessage.';
+const fakeMessage = 'a fake message.';
 
+const original = bar.getMessage;
 const fake = () => fakeMessage;
 
 QUnit.module('my example tests', {
@@ -15,8 +15,6 @@ QUnit.module('my example tests', {
 		}
 });
 
-
 QUnit.test('can an imported module be mocked?', assert => {
-  const expected = 'The message is: ' + fakeMessage;
-	assert.equal(foo.message(), expected);
+	assert.equal(foo.message(), fakeMessage);
 });

@@ -1,9 +1,9 @@
 import $ from 'jquery';
 import bar from 'modules/bar';
 
-const original = $.fn.val;
 const fakeMessage = 'A message from a fake jQuery method.';
 
+const original = $.fn.val;
 const fake = () => fakeMessage;
 
 QUnit.module('my example tests', {

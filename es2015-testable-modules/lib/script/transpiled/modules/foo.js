@@ -11,7 +11,7 @@ define(['exports', 'modules/bar'], function (exports, _bar) {
 
 	var foo = {
 		message: function message() {
-			return 'The message is: ' + _bar2.default.getMessage();
+			return _bar2.default.getMessage();
 		}
 	};
 	exports.default = foo;

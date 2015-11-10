@@ -2,7 +2,7 @@ import bar from 'modules/bar';
 
 let foo = {
 	message() {
-		return 'The message is: ' + bar.getMessage();
+		return bar.getMessage();
 	}
 };
 

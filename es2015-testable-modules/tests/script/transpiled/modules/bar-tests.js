@@ -7,8 +7,8 @@ define(['jquery', 'modules/bar'], function (_jquery, _bar) {
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var original = _jquery2.default.fn.val;
 	var fakeMessage = 'A message from a fake jQuery method.';
+	var original = _jquery2.default.fn.val;
 
 	var fake = function fake() {
 		return fakeMessage;
