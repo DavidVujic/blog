@@ -1,9 +1,11 @@
 import $ from 'jquery';
 
-const bar = {
-	getMessage: () => {
-		return $('input[name=message]').val();
-	}
+const msg = () => {
+	return $('input[name=message]').val();
+};
+
+let bar = {
+	getMessage: msg
 };
 
 export default bar;

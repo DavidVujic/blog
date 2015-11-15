@@ -9,10 +9,12 @@ define(['exports', 'jquery'], function (exports, _jquery) {
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	var msg = function msg() {
+		return (0, _jquery2.default)('input[name=message]').val();
+	};
+
 	var bar = {
-		getMessage: function getMessage() {
-			return (0, _jquery2.default)('input[name=message]').val();
-		}
+		getMessage: msg
 	};
 	exports.default = bar;
 });
