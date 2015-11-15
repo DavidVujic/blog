@@ -4,7 +4,7 @@ const msg = () => {
 	return $('input[name=message]').val();
 };
 
-let bar = {
+const bar = {
 	getMessage: msg
 };
 
